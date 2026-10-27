@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>2026 Battery Management System, Craig Gleason III</title>
+  <meta name="description" content="A six-board battery management system for Longhorn Racing Solar's 120 V, 40 A pack, led by Craig Gleason III, including the BQ79616 daisy-chain driver for the segment monitoring boards.">
+  <meta name="theme-color" content="#0b1a33">
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <meta property="og:title" content="2026 Battery Management System">
+  <meta property="og:description" content="Six-board BMS for a 120 V, 40 A solar car pack, and the parasitic drain that killed the last one.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="site-head">
+  <div class="wrap">
+    <a class="mark" href="/" aria-label="Craig Gleason III, home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#122544"/><rect x="1" y="1" width="30" height="30" rx="6" fill="none" stroke="#263c63"/><path d="M14 9.5a6.5 6.5 0 1 0 0 13" fill="none" stroke="#c8894a" stroke-width="2.6" stroke-linecap="round"/><path d="M18 16h5.5v3.5a3 3 0 0 1-3 3H18" fill="none" stroke="#e6ebf3" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="23.5" cy="10" r="2" fill="#e6ebf3"/></svg>
+      <span>Craig Gleason III</span>
+    </a>
+    <nav class="site-nav" aria-label="Main">
+      <a href="/#projects" aria-current="page">Projects</a>
+      <a href="/#experience">Experience</a>
+      <a href="/assets/docs/Craig_Gleason_Resume.pdf">Résumé</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+  <p class="crumb"><a href="/#projects">← All projects</a></p>
+
+  <header class="p-head">
+    <h1>2026 Battery Management System</h1>
+    <p class="lede">A six-board BMS for the next car's 120 V, 40 A pack. It began with a question: why did last year's battery die while the car was parked?</p>
+    <dl class="facts">
+      <div><dt>Role</dt><dd>BMS Lead, segment monitor firmware</dd></div>
+      <div><dt>Team</dt><dd>8 engineers</dd></div>
+      <div><dt>Timeline</dt><dd>Apr 2026 – present</dd></div>
+      <div><dt>Status</dt><dd><span class="status">In development</span></dd></div>
+      <div><dt>Source</dt><dd><a href="https://github.com/lhr-solar/2027-Firmware/tree/dev/PLAT-bq79616-driver/firmware">lhr-solar/2027-Firmware</a></dd></div>
+    </dl>
+  </header>
+
+  <div class="p-body">
+    <aside class="toc" aria-label="On this page">
+      <nav>
+        <p>On this page</p>
+        <ol>
+          <li><a href="#why">Why redesign</a></li>
+          <li><a href="#architecture">Architecture</a></li>
+          <li><a href="#driver">BQ79616 driver</a></li>
+          <li><a href="#leading">Leading the team</a></li>
+          <li><a href="#next">What's next</a></li>
+        </ol>
+      </nav>
+    </aside>
+
+    <article class="prose">
+      <section id="why">
+        <h2>Why redesign</h2>
+        <p>Last year's battery pack was permanently destroyed while the car sat in storage. Before designing anything new, I needed to know why.</p>
+        <p>I traced it with current measurements on the bench. The culprit was the old BMS's <strong>isolation circuitry</strong>: a hidden <strong>7 mA</strong> parasitic drain on the pack, <strong>20× higher</strong> than expected.</p>
+        <dl class="compare">
+          <div><dt>Old design, in storage</dt><dd>7 mA<small>hidden drain through the isolators</small></dd></div>
+          <div><dt>New design, in storage</dt><dd>6 µA<small>per board, with the monitors shut down</small></dd></div>
+        </dl>
+        <div class="todo"><b>Coming: the bench measurement</b><p>A photo of the setup used to find the drain.</p></div>
+      </section>
+
+      <section id="architecture">
+        <h2>Architecture</h2>
+        <p>The fix needed to remove the cause, not just shrink it. The new BMS uses <strong>TI BQ79616</strong> battery monitors, which talk to each other over a built-in isolated daisy chain. The separate isolators that caused the drain are gone, and the firmware shuts the monitors down whenever communication stops, so a parked car can't leave them running.</p>
+
+        <figure class="diagram">
+          <svg viewBox="0 0 800 500" role="img" aria-labelledby="chain-t">
+            <title id="chain-t">An STM32G4 host MCU talks UART to a BQ79600 bridge. The bridge drives an isolated daisy chain of four BQ79616 monitors, one per eight-cell segment.</title>
+            <defs><marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#93a1ba"/></marker></defs>
+            <g font-family="Schibsted Grotesk, sans-serif" fill="#e6ebf3">
+              <rect x="40" y="205" width="170" height="90" rx="8" fill="#122544" stroke="#263c63"/>
+              <text x="125" y="245" text-anchor="middle" font-size="20" font-weight="700">STM32G4</text>
+              <text x="125" y="270" text-anchor="middle" font-size="15" fill="#93a1ba">host MCU</text>
+              <line x1="210" y1="250" x2="282" y2="250" stroke="#93a1ba" stroke-width="2" marker-end="url(#ah2)"/>
+              <text x="246" y="238" text-anchor="middle" font-size="14" fill="#93a1ba">UART</text>
+              <text x="246" y="275" text-anchor="middle" font-size="12" fill="#93a1ba">1 Mbps</text>
+              <rect x="285" y="205" width="160" height="90" rx="8" fill="#122544" stroke="#c8894a"/>
+              <text x="365" y="245" text-anchor="middle" font-size="20" font-weight="700">BQ79600</text>
+              <text x="365" y="270" text-anchor="middle" font-size="15" fill="#93a1ba">bridge</text>
+              <path d="M445 250 H500 V95 H540 M500 195 H540 M500 305 H540 M500 405 H540 M500 250 V405" fill="none" stroke="#c8894a" stroke-width="2.5" stroke-dasharray="7 5"/>
+              <text x="470" y="160" text-anchor="middle" font-size="13" fill="#e0ad7a" transform="rotate(-90 470 160)">isolated daisy chain</text>
+              <rect x="540" y="60" width="210" height="70" rx="8" fill="#122544" stroke="#263c63"/><text x="560" y="92" font-size="18" font-weight="700">BQ79616</text><text x="560" y="114" font-size="14" fill="#93a1ba">segment 4, 8 cells</text>
+              <rect x="540" y="160" width="210" height="70" rx="8" fill="#122544" stroke="#263c63"/><text x="560" y="192" font-size="18" font-weight="700">BQ79616</text><text x="560" y="214" font-size="14" fill="#93a1ba">segment 3, 8 cells</text>
+              <rect x="540" y="270" width="210" height="70" rx="8" fill="#122544" stroke="#263c63"/><text x="560" y="302" font-size="18" font-weight="700">BQ79616</text><text x="560" y="324" font-size="14" fill="#93a1ba">segment 2, 8 cells</text>
+              <rect x="540" y="370" width="210" height="70" rx="8" fill="#122544" stroke="#263c63"/><text x="560" y="402" font-size="18" font-weight="700">BQ79616</text><text x="560" y="424" font-size="14" fill="#93a1ba">segment 1, 8 cells</text>
+            </g>
+          </svg>
+          <figcaption>Cell monitoring. One BQ79616 per segment, chained through a BQ79600 bridge, so the MCU needs only one UART for the whole chain.</figcaption>
+        </figure>
+
+        <p>The rest of the system covers current monitoring, cell balancing, HV contactor control and CAN telemetry, across six boards in total. Power was a design goal throughout. Contactor economizers, the isoUART chain and closed-loop fan control bring the BMS to <strong>10 W active</strong>, 5× less than the previous system, and <strong>25 µA quiescent</strong> for the whole system, both measured on the bench.</p>
+
+        <div class="todo"><b>Coming: full system diagram</b><p>All six boards and how they connect: monitoring, current sensing, contactors, fans and CAN.</p></div>
+        <div class="todo"><b>Coming: board renders</b><p>Renders and layouts of the BMS boards.</p></div>
+      </section>
+
+      <section id="driver">
+        <h2>BQ79616 driver</h2>
+        <p>I wrote the driver that the segment monitoring firmware uses to run the daisy chain. It lives in the team's shared firmware platform, so any board on the car can use it. The MCU only ever talks to the BQ79600 bridge, which forwards each command up the chain and passes the replies back.</p>
+
+        <h3>Bringing up the chain</h3>
+        <ol class="flow">
+          <li><b>Initialize</b>Set up the hardware CRC unit, a wake timer, the pins and the UART, without talking to the chips yet.</li>
+          <li><b>Wake</b>Hand the UART's TX pin to a timer, which times a 2.75 ms WAKE ping on its own, in the middle of the datasheet's 2.5–3 ms window. Then give the pin back to the UART and have the bridge send a WAKE tone up the stack.</li>
+          <li><b>Auto-address</b>Give the bridge address 0 and the monitors 1 to N, mark the last one as top of stack, then read the addresses back to check them.</li>
+          <li><b>Configure</b>Write each setting to every monitor at once, then read it back from each one: cell count, communication timeout, thermistor inputs, and the thermistor reference.</li>
+          <li class="end"><b>Read</b>Run a single-shot ADC round robin on every monitor and convert the cell voltages to millivolts with integer maths only.</li>
+        </ol>
+
+        <h3>Shutting down on lost communication</h3>
+        <p>This is the step that prevents another dead pack. During configuration, every monitor is told to go into SHUTDOWN if it doesn't hear valid communication for a set time. If the MCU powers off, crashes or loses the chain, the monitors turn themselves off. Every write is verified against every device, so a monitor that missed the setting fails bring-up instead of running unprotected.</p>
+
+        <pre class="code" aria-label="C code: bq_stack_write_verify and the comm timeout setting"><code><span class="c">/* Stack-write one byte to every BQ79616, then stack-read it back and check every device took it */</span>
+<span class="k">static</span> bq_status_t <span class="f">bq_stack_write_verify</span>(uint16_t reg_addr, uint8_t value)
+{
+    <span class="k">static</span> bq_response_frame_t frames[BQ_MAX_RESPONSE_FRAMES];
+    <span class="k">const</span> bq_msg_frame_t read = {
+        .req      = BQ_STACK_READ,
+        .reg_addr = reg_addr,
+        .len      = 1U,
+    };
+    bq_status_t status = bq_write_byte(BQ_STACK_WRITE, 0U, reg_addr, value);
+
+    <span class="k">if</span> (status != BQ_OK) {
+        <span class="k">return</span> status;
+    }
+    status = bq_read(&amp;read, frames, BQ_MAX_RESPONSE_FRAMES);
+    <span class="k">if</span> (status != BQ_OK) {
+        <span class="k">return</span> status;
+    }
+    <span class="k">for</span> (uint8_t i = 0U; i &lt; s_cfg.num_devices; i++) {
+        <span class="k">if</span> (frames[i].data[0] != value) {
+            <span class="k">return</span> BQ_ERR_VERIFY;
+        }
+    }
+
+    <span class="k">return</span> BQ_OK;
+}
+
+<span class="c">/* In bq_config(): */</span>
+    <span class="c">/* Long comm timeout: after comm_timeout without valid communication, go to SHUTDOWN.
+     * CTS_TIME = 0 leaves the short timeout off. */</span>
+    status = bq_stack_write_verify(BQ_REG_COMM_TIMEOUT_CONF,
+                                   BQ_REG_COMM_TIMEOUT_CONF_CTL_ACT_SHUTDOWN | (uint8_t)comm_timeout);</code></pre>
+        <p class="code-src">From <a href="https://github.com/lhr-solar/2027-Firmware/blob/dev/PLAT-bq79616-driver/firmware/platform/drivers/Src/BQ79616.c">firmware/platform/drivers/Src/BQ79616.c</a></p>
+
+        <h3>Design choices</h3>
+        <ul>
+          <li><strong>Every call says why it failed.</strong> Functions return a typed status (timeout, CRC error, mismatched frame, failed verify) instead of a bare pass/fail, so a bad cable and a misconfigured chip look different in the logs.</li>
+          <li><strong>Frames are checked in hardware.</strong> The STM32's CRC peripheral computes each frame's CRC-16, and every reply is checked for length, device address and register before it's used.</li>
+          <li><strong>The datasheet is cited inline.</strong> Timing constants and register settings point to the datasheet section and page they came from, so the next person can check them.</li>
+          <li><strong>One owner, by design.</strong> The driver uses static buffers and no lock, and its header says so: one task owns the chain, and other tasks get data from it through a queue.</li>
+        </ul>
+      </section>
+
+      <section id="leading">
+        <h2>Leading the team</h2>
+        <p>I lead the 8 engineers building the BMS, across cell monitoring, cell balancing, current sensing, contactor control and CAN telemetry. I review every KiCad and firmware pull request across 8 repositories, which has caught schematic and driver defects before bring-up rather than after.</p>
+        <div class="todo"><b>Coming: team and bench photos</b><p>The team at work and the boards on the bench.</p></div>
+      </section>
+
+      <section id="next">
+        <h2>What's next</h2>
+        <p>The driver brings up the chain and reads cell voltages today. Next come cell balancing, thermistor temperature readings, and reading the monitors' fault registers and fault pin.</p>
+      </section>
+
+      <nav class="next-proj" aria-label="More projects">
+        <a href="/projects/bps-leader/">← BPS Leader Board</a>
+        <a href="/#projects">All projects</a>
+      </nav>
+    </article>
+  </div>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div>
+      <h2>Get in touch</h2>
+      <p><a href="mailto:craiggleasoniii@gmail.com">craiggleasoniii@gmail.com</a></p>
+    </div>
+    <div class="actions">
+      <a class="btn" href="https://github.com/CraigGleason7">GitHub</a>
+      <a class="btn" href="https://www.linkedin.com/in/craigiii/">LinkedIn</a>
+      <a class="btn" href="/assets/docs/Craig_Gleason_Resume.pdf">Résumé</a>
+    </div>
+  </div>
+</footer>
+<script src="/assets/js/site.js" defer></script>
+</body>
+</html>
