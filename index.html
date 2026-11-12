@@ -3,14 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Craig Gleason III, embedded firmware and hardware</title>
-  <meta name="description" content="Craig Gleason III designs boards and writes firmware for the battery system of Longhorn Racing Solar's car. ECE at UT Austin, graduating May 2028.">
+  <title>Craig Gleason III, embedded firmware and hardware engineer</title>
+  <meta name="description" content="Craig Gleason III designs boards and writes firmware for the battery system of Longhorn Racing Solar's car. ECE at UT Austin, graduating May 2028. Looking for a Summer 2027 embedded internship.">
   <meta name="theme-color" content="#0b1a33">
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
-  <meta property="og:title" content="Craig Gleason III, embedded firmware and hardware">
-  <meta property="og:description" content="Battery protection firmware and boards for a solar race car. ECE at UT Austin.">
-  <meta property="og:image" content="https://craiggleasoniii.com/assets/img/bpsl/revb-3d-1600.webp">
-  <meta property="og:url" content="https://craiggleasoniii.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Craig Gleason III, embedded firmware and hardware engineer">
+  <meta property="og:description" content="Battery protection firmware and boards for a solar race car. ECE at UT Austin. Looking for a Summer 2027 internship.">
+  <meta property="og:image" content="https://craiggleason7.github.io/assets/img/bpsl/revb-3d-1600.webp">
+  <meta property="og:url" content="https://craiggleason7.github.io/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -28,6 +29,7 @@
     <nav class="site-nav" aria-label="Main">
       <a href="#projects">Projects</a>
       <a href="#experience">Experience</a>
+      <a href="#contact">Contact</a>
       <a href="/assets/docs/Craig_Gleason_Resume.pdf">Résumé</a>
     </nav>
   </div>
@@ -39,27 +41,33 @@
       <div>
         <h1>Craig Gleason III</h1>
         <p class="lede">I design the boards and write the firmware that keep a solar race car's battery safe.</p>
-        <p class="hero-meta">Electrical and Computer Engineering at UT Austin, graduating May 2028. BMS Lead at Longhorn Racing Solar. Looking for 2027 internships in embedded systems.</p>
+        <dl class="brief panel">
+          <div><dt>Looking for</dt><dd>A Summer 2027 internship in embedded firmware or hardware</dd></div>
+          <div><dt>Studying</dt><dd>Electrical and Computer Engineering at UT Austin. Graduating May 2028, GPA 3.94</dd></div>
+          <div><dt>Leading</dt><dd>The battery management system team at Longhorn Racing Solar</dd></div>
+          <div><dt>Work status</dt><dd>U.S. citizen</dd></div>
+          <div><dt>Based in</dt><dd>Austin, Texas. Open to relocating</dd></div>
+        </dl>
         <div class="actions">
           <a class="btn btn--primary" href="/assets/docs/Craig_Gleason_Resume.pdf">Download résumé</a>
+          <a class="btn" href="mailto:craiggleasoniii@gmail.com">Email</a>
           <a class="btn" href="https://github.com/CraigGleason7">GitHub</a>
           <a class="btn" href="https://www.linkedin.com/in/craigiii/">LinkedIn</a>
-          <a class="btn" href="mailto:craiggleasoniii@gmail.com">Email</a>
         </div>
       </div>
       <figure class="hero-board">
         <a href="/projects/bps-leader/"><img src="/assets/img/bpsl/revb-3d-1600.webp" width="1308" height="909" alt="3D render of the BPS Leader Rev B board: a green PCB with a system-on-module in the center, connectors along every edge, and a row of labeled status LEDs."></a>
-        <figcaption>BPS Leader Rev B. Raced at FSGP 2026.</figcaption>
+        <figcaption>BPS Leader Rev B. Raced at the Formula Sun Grand Prix (FSGP) 2026.</figcaption>
       </figure>
     </div>
   </section>
 
   <div class="wrap proof" aria-label="Results">
-    <ul>
+    <ul class="panel">
       <li><strong>0</strong>on-track battery faults at FSGP 2026</li>
       <li><strong>&lt;&#8202;7 ms</strong>from fault detection to open HV contactors</li>
       <li><strong>6 µA</strong>storage draw per board, down from a hidden 7 mA drain</li>
-      <li><strong>8 engineers</strong>led on a six-board BMS for a 120 V, 40 A pack</li>
+      <li><strong>8 engineers</strong>led on a six-board BMS for a 120&nbsp;V, 40&nbsp;A pack</li>
     </ul>
   </div>
 
@@ -67,11 +75,11 @@
     <div class="wrap">
       <div class="section-head"><h2 id="projects-h">Projects</h2></div>
 
-      <article class="project">
+      <article class="project panel">
         <a class="project-media" href="/projects/bps-leader/" tabindex="-1" aria-hidden="true">
           <img src="/assets/img/bpsl/revb-layout-1600.webp" width="808" height="564" alt="" loading="lazy">
         </a>
-        <div>
+        <div class="project-body">
           <h3><a href="/projects/bps-leader/">BPS Leader Board</a></h3>
           <p class="sub">Battery protection computer, Longhorn Racing Solar. Solo board design and firmware.</p>
           <ul class="points">
@@ -86,31 +94,31 @@
         </div>
       </article>
 
-      <article class="project">
+      <article class="project project--flip panel">
         <a class="project-media" href="/projects/bms-2026/" tabindex="-1" aria-hidden="true">
-          <svg viewBox="0 0 800 500" role="img" aria-label="Diagram: an STM32 talks UART to a BQ79600 bridge, which drives an isolated daisy chain of four BQ79616 monitors, one per eight-cell segment." style="display:block;width:100%;aspect-ratio:16/10;background:#081428">
+          <svg viewBox="15 30 760 440" role="img" aria-label="Diagram: an STM32 talks UART to a BQ79600 bridge, which drives an isolated daisy chain of four BQ79616 monitors, one per eight-cell segment.">
             <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#93a1ba"/></marker></defs>
             <g font-family="Schibsted Grotesk, sans-serif" fill="#e6ebf3">
-              <rect x="40" y="205" width="170" height="90" rx="8" fill="#122544" stroke="#263c63"/>
+              <rect x="40" y="205" width="170" height="90" rx="3" fill="#122544" stroke="#263c63"/>
               <text x="125" y="245" text-anchor="middle" font-size="20" font-weight="700">STM32G4</text>
               <text x="125" y="270" text-anchor="middle" font-size="15" fill="#93a1ba">host MCU</text>
               <line x1="210" y1="250" x2="282" y2="250" stroke="#93a1ba" stroke-width="2" marker-end="url(#ah)"/>
               <text x="246" y="238" text-anchor="middle" font-size="14" fill="#93a1ba">UART</text>
-              <rect x="285" y="205" width="160" height="90" rx="8" fill="#122544" stroke="#c8894a"/>
+              <rect x="285" y="205" width="160" height="90" rx="3" fill="#122544" stroke="#c8894a"/>
               <text x="365" y="245" text-anchor="middle" font-size="20" font-weight="700">BQ79600</text>
               <text x="365" y="270" text-anchor="middle" font-size="15" fill="#93a1ba">bridge</text>
               <path d="M445 250 H500 V95 H540 M500 195 H540 M500 305 H540 M500 405 H540 M500 250 V405" fill="none" stroke="#c8894a" stroke-width="2.5" stroke-dasharray="7 5"/>
               <text x="472" y="235" text-anchor="middle" font-size="13" fill="#e0ad7a">isolated</text>
               <g>
-                <rect x="540" y="60" width="210" height="70" rx="8" fill="#122544" stroke="#263c63"/><text x="560" y="92" font-size="18" font-weight="700">BQ79616</text><text x="560" y="114" font-size="14" fill="#93a1ba">segment 4, 8 cells</text>
-                <rect x="540" y="160" width="210" height="70" rx="8" fill="#122544" stroke="#263c63"/><text x="560" y="192" font-size="18" font-weight="700">BQ79616</text><text x="560" y="214" font-size="14" fill="#93a1ba">segment 3, 8 cells</text>
-                <rect x="540" y="270" width="210" height="70" rx="8" fill="#122544" stroke="#263c63"/><text x="560" y="302" font-size="18" font-weight="700">BQ79616</text><text x="560" y="324" font-size="14" fill="#93a1ba">segment 2, 8 cells</text>
-                <rect x="540" y="370" width="210" height="70" rx="8" fill="#122544" stroke="#263c63"/><text x="560" y="402" font-size="18" font-weight="700">BQ79616</text><text x="560" y="424" font-size="14" fill="#93a1ba">segment 1, 8 cells</text>
+                <rect x="540" y="60" width="210" height="70" rx="3" fill="#122544" stroke="#263c63"/><text x="560" y="92" font-size="18" font-weight="700">BQ79616</text><text x="560" y="114" font-size="14" fill="#93a1ba">segment 4, 8 cells</text>
+                <rect x="540" y="160" width="210" height="70" rx="3" fill="#122544" stroke="#263c63"/><text x="560" y="192" font-size="18" font-weight="700">BQ79616</text><text x="560" y="214" font-size="14" fill="#93a1ba">segment 3, 8 cells</text>
+                <rect x="540" y="270" width="210" height="70" rx="3" fill="#122544" stroke="#263c63"/><text x="560" y="302" font-size="18" font-weight="700">BQ79616</text><text x="560" y="324" font-size="14" fill="#93a1ba">segment 2, 8 cells</text>
+                <rect x="540" y="370" width="210" height="70" rx="3" fill="#122544" stroke="#263c63"/><text x="560" y="402" font-size="18" font-weight="700">BQ79616</text><text x="560" y="424" font-size="14" fill="#93a1ba">segment 1, 8 cells</text>
               </g>
             </g>
           </svg>
         </a>
-        <div>
+        <div class="project-body">
           <h3><a href="/projects/bms-2026/">2026 Battery Management System</a></h3>
           <p class="sub">Six-board BMS for a 120 V, 40 A pack. Team lead and segment monitor firmware.</p>
           <ul class="points">
@@ -126,7 +134,7 @@
       </article>
 
       <div class="also">
-        <p><strong style="color:var(--ink)">Also built:</strong> R-Chess, a terminal chess game in Rust with full legal move generation, including castling, en passant and promotion. <a href="https://github.com/CraigGleason7">See it on GitHub</a>.</p>
+        <p><strong>Also built:</strong> R-Chess, a terminal chess game in Rust with full legal move generation, including castling, en passant and promotion. <a href="https://github.com/CraigGleason7">See it on GitHub</a>.</p>
       </div>
     </div>
   </section>
@@ -140,7 +148,7 @@
           <div>
             <h3>Battery Management System Lead</h3>
             <p class="org">Longhorn Racing Solar, Austin</p>
-            <p class="desc">Lead the 8-engineer team building the car's six-board BMS. Moved the design to TI BQ79616 monitors with built-in isolated communication, cut active power draw 5× to 10 W, and review every KiCad and firmware pull request across 8 repositories.</p>
+            <p class="desc">Lead the 8-engineer team building the car's six-board BMS. Moved the design to TI BQ79616 monitors with built-in isolated communication and wrote their driver, cut active power draw 5× to 10 W, and review every KiCad and firmware pull request across 8 repositories.</p>
           </div>
         </li>
         <li>
@@ -174,10 +182,27 @@
   <section class="section" id="skills" aria-labelledby="skills-h">
     <div class="wrap">
       <div class="section-head"><h2 id="skills-h">Skills</h2></div>
-      <div class="skills">
-        <div><h3>Embedded</h3><p>Embedded C, bare-metal and HAL, FreeRTOS, CAN, I²C, SPI, QSPI, UART, ARM, Verilog, GDB, SWD, Linux</p></div>
+      <div class="skills panel">
+        <div><h3>Embedded</h3><p>Embedded C, bare-metal and HAL, FreeRTOS, CAN, I²C, SPI, QSPI, UART, isoUART, ARM, Verilog, GDB, SWD, Linux</p></div>
         <div><h3>Hardware</h3><p>KiCad schematic and layout, power electronics, soldering, oscilloscopes, logic analyzers, STM32G4, ESP32-C6, iCE40</p></div>
         <div><h3>Software and tools</h3><p>C/C++, Rust, Python, CI/CD, Git and GitHub, STM32CubeMX, Makefiles</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contact" aria-labelledby="contact-h">
+    <div class="wrap">
+      <div class="contact panel">
+        <div>
+          <h2 id="contact-h">Contact</h2>
+          <p>I'm looking for a Summer 2027 internship in embedded firmware or hardware. Email is the fastest way to reach me.</p>
+          <a class="mail" href="mailto:craiggleasoniii@gmail.com">craiggleasoniii@gmail.com</a>
+        </div>
+        <div class="actions">
+          <a class="btn btn--primary" href="/assets/docs/Craig_Gleason_Resume.pdf">Download résumé</a>
+          <a class="btn" href="https://github.com/CraigGleason7">GitHub</a>
+          <a class="btn" href="https://www.linkedin.com/in/craigiii/">LinkedIn</a>
+        </div>
       </div>
     </div>
   </section>
@@ -185,15 +210,12 @@
 
 <footer class="site-foot">
   <div class="wrap">
-    <div>
-      <h2>Get in touch</h2>
-      <p><a href="mailto:craiggleasoniii@gmail.com">craiggleasoniii@gmail.com</a></p>
-    </div>
-    <div class="actions">
-      <a class="btn" href="https://github.com/CraigGleason7">GitHub</a>
-      <a class="btn" href="https://www.linkedin.com/in/craigiii/">LinkedIn</a>
-      <a class="btn" href="/assets/docs/Craig_Gleason_Resume.pdf">Résumé</a>
-    </div>
+    <p>© 2026 Craig Gleason III</p>
+    <nav aria-label="Footer">
+      <a href="/projects/bps-leader/">BPS Leader Board</a>
+      <a href="/projects/bms-2026/">2026 BMS</a>
+      <a href="https://github.com/CraigGleason7/CraigGleason7.github.io">Site source</a>
+    </nav>
   </div>
 </footer>
 <script src="/assets/js/site.js" defer></script>

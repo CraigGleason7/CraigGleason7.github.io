@@ -9,7 +9,8 @@
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <meta property="og:title" content="BPS Leader Board">
   <meta property="og:description" content="Battery protection computer for a solar race car. Board design and FreeRTOS firmware.">
-  <meta property="og:image" content="https://craiggleasoniii.com/assets/img/bpsl/revb-3d-1600.webp">
+  <meta property="og:image" content="https://craiggleason7.github.io/assets/img/bpsl/revb-3d-1600.webp">
+  <meta property="og:url" content="https://craiggleason7.github.io/projects/bps-leader/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -27,6 +28,7 @@
     <nav class="site-nav" aria-label="Main">
       <a href="/#projects" aria-current="page">Projects</a>
       <a href="/#experience">Experience</a>
+      <a href="/#contact">Contact</a>
       <a href="/assets/docs/Craig_Gleason_Resume.pdf">Résumé</a>
     </nav>
   </div>
@@ -38,12 +40,12 @@
   <header class="p-head">
     <h1>BPS Leader Board</h1>
     <p class="lede">The battery protection computer for Longhorn Racing Solar's car. It watches every cell, owns the high-voltage contactors, and opens them the moment anything leaves its safe range.</p>
-    <dl class="facts">
+    <dl class="facts panel">
       <div><dt>Role</dt><dd>Board design and all firmware</dd></div>
       <div><dt>Team</dt><dd>Longhorn Racing Solar</dd></div>
       <div><dt>Timeline</dt><dd>2025 – 2026</dd></div>
       <div><dt>Status</dt><dd><span class="status">Raced at FSGP 2026</span></dd></div>
-      <div><dt>Source</dt><dd><a href="https://github.com/lhr-solar/PS-BPSLeader">lhr-solar/PS-BPSLeader</a></dd></div>
+      <div><dt>Source</dt><dd><a href="https://github.com/lhr-solar/PS-BPSLeader/tree/cf23af5b333274080a49f7f96c6a7cc13cb14c89/Software">lhr-solar/PS-BPSLeader</a></dd></div>
     </dl>
   </header>
 
@@ -77,11 +79,11 @@
         <h2>System</h2>
         <p>The Leader Board sits between the battery's monitoring boards and the rest of the car. Cell data arrives over the BPS's own CAN bus, and the board drives four contactors, reads three E-stop loops, and reports to the car and to the charger on separate buses.</p>
 
-        <figure class="diagram">
-          <svg viewBox="0 0 900 500" role="img" aria-labelledby="sys-t">
+        <figure class="diagram diagram--wide">
+          <div class="diagram-scroll"><svg viewBox="0 0 900 500" role="img" aria-labelledby="sys-t">
             <title id="sys-t">Block diagram: the BPS Leader Board in the middle. On the left, volt-temp boards and the amperes board connect over BPS CAN, the precharge board connects through analog voltage sensing, three E-stop loops feed in, and the 24 V low-voltage bus powers the board. On the right, the board drives and senses the HV+, HV−, array and array precharge contactors, talks to the car over Car CAN and to the Elcon charger over CAN, and drives fans, a strobe and status LEDs.</title>
             <g font-family="Schibsted Grotesk, sans-serif" font-size="15" fill="#e6ebf3">
-              <rect x="350" y="30" width="200" height="440" rx="10" fill="#122544" stroke="#c8894a" stroke-width="1.5"/>
+              <rect x="350" y="30" width="200" height="440" rx="3" fill="#122544" stroke="#c8894a" stroke-width="1.5"/>
               <text x="450" y="225" text-anchor="middle" font-size="22" font-weight="700">BPS Leader</text>
               <text x="450" y="252" text-anchor="middle" fill="#93a1ba">STM32G473 on SOM</text>
               <text x="450" y="276" text-anchor="middle" fill="#93a1ba">FreeRTOS</text>
@@ -96,20 +98,20 @@
               </g>
 
               <g>
-                <rect x="30" y="40" width="220" height="60" rx="8" fill="#0b1a33" stroke="#263c63"/><text x="46" y="66" font-weight="600">Volt-temp boards</text><text x="46" y="86" font-size="13" fill="#93a1ba">cell voltage, temperature</text>
-                <rect x="30" y="130" width="220" height="60" rx="8" fill="#0b1a33" stroke="#263c63"/><text x="46" y="156" font-weight="600">Amperes board</text><text x="46" y="176" font-size="13" fill="#93a1ba">pack current</text>
-                <rect x="30" y="220" width="220" height="60" rx="8" fill="#0b1a33" stroke="#263c63"/><text x="46" y="246" font-weight="600">Precharge board</text><text x="46" y="266" font-size="13" fill="#93a1ba">battery, array voltage</text>
-                <rect x="30" y="310" width="220" height="60" rx="8" fill="#0b1a33" stroke="#263c63"/><text x="46" y="336" font-weight="600">3 E-stop loops</text><text x="46" y="356" font-size="13" fill="#93a1ba">emergency stop inputs</text>
-                <rect x="30" y="400" width="220" height="60" rx="8" fill="#0b1a33" stroke="#263c63"/><text x="46" y="426" font-weight="600">Low-voltage bus</text><text x="46" y="446" font-size="13" fill="#93a1ba">protected, then 5 V buck</text>
+                <rect x="30" y="40" width="220" height="60" rx="3" fill="#0b1a33" stroke="#263c63"/><text x="46" y="66" font-weight="600">Volt-temp boards</text><text x="46" y="86" font-size="13" fill="#93a1ba">cell voltage, temperature</text>
+                <rect x="30" y="130" width="220" height="60" rx="3" fill="#0b1a33" stroke="#263c63"/><text x="46" y="156" font-weight="600">Amperes board</text><text x="46" y="176" font-size="13" fill="#93a1ba">pack current</text>
+                <rect x="30" y="220" width="220" height="60" rx="3" fill="#0b1a33" stroke="#263c63"/><text x="46" y="246" font-weight="600">Precharge board</text><text x="46" y="266" font-size="13" fill="#93a1ba">battery, array voltage</text>
+                <rect x="30" y="310" width="220" height="60" rx="3" fill="#0b1a33" stroke="#263c63"/><text x="46" y="336" font-weight="600">3 E-stop loops</text><text x="46" y="356" font-size="13" fill="#93a1ba">emergency stop inputs</text>
+                <rect x="30" y="400" width="220" height="60" rx="3" fill="#0b1a33" stroke="#263c63"/><text x="46" y="426" font-weight="600">Low-voltage bus</text><text x="46" y="446" font-size="13" fill="#93a1ba">protected, then 5 V buck</text>
 
-                <rect x="650" y="40" width="220" height="60" rx="8" fill="#0b1a33" stroke="#263c63"/><text x="666" y="66" font-weight="600">HV+ and HV−</text><text x="666" y="86" font-size="13" fill="#93a1ba">pack contactors</text>
-                <rect x="650" y="130" width="220" height="60" rx="8" fill="#0b1a33" stroke="#263c63"/><text x="666" y="156" font-weight="600">Array, precharge</text><text x="666" y="176" font-size="13" fill="#93a1ba">solar array contactors</text>
-                <rect x="650" y="220" width="220" height="60" rx="8" fill="#0b1a33" stroke="#263c63"/><text x="666" y="246" font-weight="600">Car CAN</text><text x="666" y="266" font-size="13" fill="#93a1ba">dash, telemetry</text>
-                <rect x="650" y="310" width="220" height="60" rx="8" fill="#0b1a33" stroke="#263c63"/><text x="666" y="336" font-weight="600">Elcon charger</text><text x="666" y="356" font-size="13" fill="#93a1ba">charge control</text>
-                <rect x="650" y="400" width="220" height="60" rx="8" fill="#0b1a33" stroke="#263c63"/><text x="666" y="426" font-weight="600">Fans, strobe, LEDs</text><text x="666" y="446" font-size="13" fill="#93a1ba">cooling and indication</text>
+                <rect x="650" y="40" width="220" height="60" rx="3" fill="#0b1a33" stroke="#263c63"/><text x="666" y="66" font-weight="600">HV+ and HV−</text><text x="666" y="86" font-size="13" fill="#93a1ba">pack contactors</text>
+                <rect x="650" y="130" width="220" height="60" rx="3" fill="#0b1a33" stroke="#263c63"/><text x="666" y="156" font-weight="600">Array, precharge</text><text x="666" y="176" font-size="13" fill="#93a1ba">solar array contactors</text>
+                <rect x="650" y="220" width="220" height="60" rx="3" fill="#0b1a33" stroke="#263c63"/><text x="666" y="246" font-weight="600">Car CAN</text><text x="666" y="266" font-size="13" fill="#93a1ba">dash, telemetry</text>
+                <rect x="650" y="310" width="220" height="60" rx="3" fill="#0b1a33" stroke="#263c63"/><text x="666" y="336" font-weight="600">Elcon charger</text><text x="666" y="356" font-size="13" fill="#93a1ba">charge control</text>
+                <rect x="650" y="400" width="220" height="60" rx="3" fill="#0b1a33" stroke="#263c63"/><text x="666" y="426" font-weight="600">Fans, strobe, LEDs</text><text x="666" y="446" font-size="13" fill="#93a1ba">cooling and indication</text>
               </g>
             </g>
-          </svg>
+          </svg></div>
           <figcaption>What the Leader Board connects to. It also carries an ESP32 for flashing the SOM remotely, an SHT45 humidity and temperature sensor, and an 8-channel logic analyzer header for debugging the buses.</figcaption>
         </figure>
       </section>
@@ -172,7 +174,7 @@
         }
     }
 }</code></pre>
-        <p class="code-src">From <a href="https://github.com/lhr-solar/PS-BPSLeader/blob/main/Software/Core/Inc/faultHandler.h">Software/Core/Inc/faultHandler.h</a></p>
+        <p class="code-src">From <a href="https://github.com/lhr-solar/PS-BPSLeader/blob/cf23af5b333274080a49f7f96c6a7cc13cb14c89/Software/Core/Inc/faultHandler.h">Software/Core/Inc/faultHandler.h</a></p>
 
         <pre class="code" aria-label="C code: Task_FaultHandler"><code><span class="k">void</span> <span class="f">Task_FaultHandler</span>(<span class="k">void</span> *pvParameters)
 {
@@ -193,17 +195,57 @@
         Fault_Loop(fault_bit_index); <span class="c">// WILL NEVER RETURN - while(true)</span>
     }
 }</code></pre>
-        <p class="code-src">From <a href="https://github.com/lhr-solar/PS-BPSLeader/blob/main/Software/Tasks/Src/FaultHandlerTask.c">Software/Tasks/Src/FaultHandlerTask.c</a></p>
+        <p class="code-src">From <a href="https://github.com/lhr-solar/PS-BPSLeader/blob/cf23af5b333274080a49f7f96c6a7cc13cb14c89/Software/Tasks/Src/FaultHandlerTask.c">Software/Tasks/Src/FaultHandlerTask.c</a></p>
 
         <h3>Keeping telemetry off the fault path</h3>
         <p>CAN traffic that only needs relaying to the car never touches the monitoring tasks. The CAN receive interrupt pushes frames into a statically allocated circular queue, and a low-priority task drains it onto Car CAN. Pack current arrives faster than the car needs it, so the interrupt forwards one frame in three. A burst of CAN traffic can fill the queue, but it can't delay a fault.</p>
         <p>Each fault also has a name, its own LED where it matters, and a detailed printout. For example, a cell overvoltage reports which module faulted, the voltage that tripped it, and its voltage now. That made bench debugging and scrutineering much faster.</p>
 
+        <figure class="diagram diagram--wide">
+          <div class="diagram-scroll"><svg viewBox="0 0 900 450" role="img" aria-labelledby="flow-t">
+            <title id="flow-t">Three separate paths through the firmware. Telemetry: the BPS CAN interrupt puts frames bound for the car into a static 50-frame circular queue, the priority 2 CAN forwarding task drains it, and the frames go out on Car CAN. Protection: the monitoring tasks for voltage, temperature, current and contactors, at priority 3 to 4, call set_faultBit, which wakes the priority 5 fault handler, which opens the contactors, sets the fans to maximum and turns on the strobe and fault LED. Liveness: each monitoring task sets a done bit for the priority 1 watchdog task, which refreshes the independent watchdog timer only after every monitor has checked in.</title>
+            <defs><marker id="df" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#93a1ba"/></marker></defs>
+            <g font-family="Schibsted Grotesk, sans-serif" font-size="15" fill="#e6ebf3">
+              <g font-size="13" fill="#93a1ba">
+                <text x="30" y="28">Telemetry</text>
+                <text x="30" y="168">Protection</text>
+                <text x="30" y="328">Liveness</text>
+              </g>
+              <g stroke="#93a1ba" stroke-width="1.5" fill="none" marker-end="url(#df)">
+                <line x1="245" y1="75" x2="283" y2="75"/><line x1="460" y1="75" x2="498" y2="75"/><line x1="700" y1="75" x2="738" y2="75"/>
+                <line x1="285" y1="220" x2="398" y2="220"/><line x1="600" y1="220" x2="648" y2="220"/>
+                <line x1="157" y1="260" x2="157" y2="338"/><line x1="285" y1="380" x2="398" y2="380"/>
+              </g>
+              <g font-size="12" fill="#93a1ba">
+                <text x="342" y="210" text-anchor="middle">set_faultBit()</text>
+                <text x="169" y="304">done bits</text>
+              </g>
+
+              <rect x="30" y="40" width="215" height="70" rx="3" fill="#0b1a33" stroke="#263c63"/><text x="46" y="70" font-weight="600">BPS CAN interrupt</text><text x="46" y="92" font-size="13" fill="#93a1ba">frames bound for the car</text>
+              <rect x="285" y="40" width="175" height="70" rx="3" fill="#0b1a33" stroke="#263c63"/><text x="301" y="70" font-weight="600">Circular queue</text><text x="301" y="92" font-size="13" fill="#93a1ba">50 frames, static</text>
+              <rect x="500" y="40" width="200" height="70" rx="3" fill="#0b1a33" stroke="#263c63"/><text x="516" y="70" font-weight="600">CAN forwarding task</text><text x="516" y="92" font-size="13" fill="#93a1ba">priority 2</text>
+              <rect x="740" y="40" width="130" height="70" rx="3" fill="#0b1a33" stroke="#263c63"/><text x="756" y="70" font-weight="600">Car CAN</text><text x="756" y="92" font-size="13" fill="#93a1ba">dash, telemetry</text>
+
+              <rect x="30" y="180" width="255" height="80" rx="3" fill="#0b1a33" stroke="#263c63"/><text x="46" y="208" font-weight="600">Monitoring tasks</text><text x="46" y="229" font-size="13" fill="#93a1ba">voltage, temperature, current,</text><text x="46" y="247" font-size="13" fill="#93a1ba">contactors. Priority 3 to 4</text>
+              <rect x="400" y="180" width="200" height="80" rx="3" fill="#122544" stroke="#c8894a" stroke-width="1.5"/><text x="416" y="212" font-weight="700">Fault handler</text><text x="416" y="235" font-size="13" fill="#93a1ba">priority 5, alone at the top</text>
+              <rect x="650" y="180" width="220" height="80" rx="3" fill="#0b1a33" stroke="#263c63"/><text x="666" y="208" font-weight="600">Pack made safe</text><text x="666" y="229" font-size="13" fill="#93a1ba">contactors open, fans to max,</text><text x="666" y="247" font-size="13" fill="#93a1ba">strobe and fault LED on</text>
+
+              <rect x="30" y="340" width="255" height="80" rx="3" fill="#0b1a33" stroke="#263c63"/><text x="46" y="372" font-weight="600">Watchdog task</text><text x="46" y="395" font-size="13" fill="#93a1ba">priority 1</text>
+              <rect x="400" y="340" width="470" height="80" rx="3" fill="#0b1a33" stroke="#263c63"/><text x="416" y="368" font-weight="600">Independent watchdog timer</text><text x="416" y="389" font-size="13" fill="#93a1ba">refreshed only after every monitoring task has checked in,</text><text x="416" y="407" font-size="13" fill="#93a1ba">so a task that hangs resets the microcontroller</text>
+            </g>
+          </svg></div>
+          <figcaption>How data moves through the firmware. Telemetry and protection never share a path, and a third path makes sure the monitors are still running.</figcaption>
+        </figure>
+
         <h3>Testing and CI</h3>
         <p>Most drivers and tasks have a standalone test program that runs on the board: ADC, CAN, contactors, E-stops, fans, precharge, the SHT45, the watchdog, and each monitoring task, 15 in all. A GitHub Actions workflow builds all of them with <code>arm-none-eabi-gcc</code> on every push and pull request, so a change that breaks any test's build can't merge.</p>
         <p>The precharge voltage readings avoid floating point at runtime. A Python script generates lookup tables that map every raw 12-bit ADC count straight to millivolts, with the resistor divider and amplifier gain already folded in.</p>
 
-        <div class="todo"><b>Coming: firmware data-flow diagram</b><p>A diagram of how data moves from the CAN interrupt and monitoring tasks to the fault handler and Car CAN.</p></div>
+        <div class="note panel">
+          <h3>The bug that took longest to find</h3>
+          <p>In testing, the voltage monitor would run cleanly for 10 to 50 seconds and then fail, at a different moment each time. The cause was an interrupt writing the task's input data while the task was partway through reading it, so now and then the task saw half of an old reading and half of a new one.</p>
+          <p>The firmware doesn't let that happen now. Frames reach each task through a queue, and the few values shared with interrupts and timers are only updated inside a critical section, the same pattern as the fault latch above.</p>
+        </div>
       </section>
 
       <section id="hardware">
@@ -259,7 +301,11 @@
             <figcaption>Rev B layout</figcaption>
           </figure>
         </div>
-        <div class="todo"><b>Coming: what changed and why</b><p>The Rev A issues found in bring-up and how Rev B fixed each one.</p></div>
+        <div class="note panel">
+          <h3>What Rev A taught me</h3>
+          <p>Rev A came back with one mistake that touched every transistor on the board: the footprint had the gate and source pins swapped. Waiting for a new board would have stopped testing, so I reworked each transistor by hand with air wires and kept going on Rev A.</p>
+          <p>Rev B corrected the footprint and reshaped the board, with the connectors moved out to the edges.</p>
+        </div>
       </section>
 
       <section id="results">
@@ -269,8 +315,6 @@
           <li>I ran the full BMS scrutineering test suite across four validation cycles before the event. The car passed electrical and BMS scrutineering on the first attempt.</li>
           <li>A detected fault opens the HV contactors in under 7 ms.</li>
         </ul>
-        <div class="todo"><b>Coming: scope capture of the fault path</b><p>A fault being injected and the contactors opening, with the timing measured.</p></div>
-        <div class="todo"><b>Coming: the board in the car</b><p>A photo of the Leader Board installed in the battery box.</p></div>
       </section>
 
       <nav class="next-proj" aria-label="More projects">
@@ -279,19 +323,29 @@
       </nav>
     </article>
   </div>
+
+  <div class="contact contact--end panel">
+    <div>
+      <h2>Contact</h2>
+      <p>I'm looking for a Summer 2027 internship in embedded firmware or hardware. Email is the fastest way to reach me.</p>
+      <a class="mail" href="mailto:craiggleasoniii@gmail.com">craiggleasoniii@gmail.com</a>
+    </div>
+    <div class="actions">
+      <a class="btn btn--primary" href="/assets/docs/Craig_Gleason_Resume.pdf">Download résumé</a>
+      <a class="btn" href="https://github.com/CraigGleason7">GitHub</a>
+      <a class="btn" href="https://www.linkedin.com/in/craigiii/">LinkedIn</a>
+    </div>
+  </div>
 </main>
 
 <footer class="site-foot">
   <div class="wrap">
-    <div>
-      <h2>Get in touch</h2>
-      <p><a href="mailto:craiggleasoniii@gmail.com">craiggleasoniii@gmail.com</a></p>
-    </div>
-    <div class="actions">
-      <a class="btn" href="https://github.com/CraigGleason7">GitHub</a>
-      <a class="btn" href="https://www.linkedin.com/in/craigiii/">LinkedIn</a>
-      <a class="btn" href="/assets/docs/Craig_Gleason_Resume.pdf">Résumé</a>
-    </div>
+    <p>© 2026 Craig Gleason III</p>
+    <nav aria-label="Footer">
+      <a href="/">Home</a>
+      <a href="/projects/bms-2026/">2026 BMS</a>
+      <a href="https://github.com/CraigGleason7/CraigGleason7.github.io">Site source</a>
+    </nav>
   </div>
 </footer>
 <script src="/assets/js/site.js" defer></script>

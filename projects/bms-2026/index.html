@@ -9,6 +9,8 @@
   <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
   <meta property="og:title" content="2026 Battery Management System">
   <meta property="og:description" content="Six-board BMS for a 120 V, 40 A solar car pack, and the parasitic drain that killed the last one.">
+  <meta property="og:image" content="https://craiggleason7.github.io/assets/img/bpsl/revb-3d-1600.webp">
+  <meta property="og:url" content="https://craiggleason7.github.io/projects/bms-2026/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -26,6 +28,7 @@
     <nav class="site-nav" aria-label="Main">
       <a href="/#projects" aria-current="page">Projects</a>
       <a href="/#experience">Experience</a>
+      <a href="/#contact">Contact</a>
       <a href="/assets/docs/Craig_Gleason_Resume.pdf">Résumé</a>
     </nav>
   </div>
@@ -37,7 +40,7 @@
   <header class="p-head">
     <h1>2026 Battery Management System</h1>
     <p class="lede">A six-board BMS for the next car's 120 V, 40 A pack. It began with a question: why did last year's battery die while the car was parked?</p>
-    <dl class="facts">
+    <dl class="facts panel">
       <div><dt>Role</dt><dd>BMS Lead, segment monitor firmware</dd></div>
       <div><dt>Team</dt><dd>8 engineers</dd></div>
       <div><dt>Timeline</dt><dd>Apr 2026 – present</dd></div>
@@ -55,7 +58,7 @@
           <li><a href="#architecture">Architecture</a></li>
           <li><a href="#driver">BQ79616 driver</a></li>
           <li><a href="#leading">Leading the team</a></li>
-          <li><a href="#next">What's next</a></li>
+          <li><a href="#next">Where it stands</a></li>
         </ol>
       </nav>
     </aside>
@@ -65,11 +68,10 @@
         <h2>Why redesign</h2>
         <p>Last year's battery pack was permanently destroyed while the car sat in storage. Before designing anything new, I needed to know why.</p>
         <p>I traced it with current measurements on the bench. The culprit was the old BMS's <strong>isolation circuitry</strong>: a hidden <strong>7 mA</strong> parasitic drain on the pack, <strong>20× higher</strong> than expected.</p>
-        <dl class="compare">
+        <dl class="compare panel">
           <div><dt>Old design, in storage</dt><dd>7 mA<small>hidden drain through the isolators</small></dd></div>
           <div><dt>New design, in storage</dt><dd>6 µA<small>per board, with the monitors shut down</small></dd></div>
         </dl>
-        <div class="todo"><b>Coming: the bench measurement</b><p>A photo of the setup used to find the drain.</p></div>
       </section>
 
       <section id="architecture">
@@ -77,34 +79,32 @@
         <p>The fix needed to remove the cause, not just shrink it. The new BMS uses <strong>TI BQ79616</strong> battery monitors, which talk to each other over a built-in isolated daisy chain. The separate isolators that caused the drain are gone, and the firmware shuts the monitors down whenever communication stops, so a parked car can't leave them running.</p>
 
         <figure class="diagram">
-          <svg viewBox="0 0 800 500" role="img" aria-labelledby="chain-t">
+          <div class="diagram-scroll"><svg viewBox="0 0 800 500" role="img" aria-labelledby="chain-t">
             <title id="chain-t">An STM32G4 host MCU talks UART to a BQ79600 bridge. The bridge drives an isolated daisy chain of four BQ79616 monitors, one per eight-cell segment.</title>
             <defs><marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#93a1ba"/></marker></defs>
             <g font-family="Schibsted Grotesk, sans-serif" fill="#e6ebf3">
-              <rect x="40" y="205" width="170" height="90" rx="8" fill="#122544" stroke="#263c63"/>
+              <rect x="40" y="205" width="170" height="90" rx="3" fill="#122544" stroke="#263c63"/>
               <text x="125" y="245" text-anchor="middle" font-size="20" font-weight="700">STM32G4</text>
               <text x="125" y="270" text-anchor="middle" font-size="15" fill="#93a1ba">host MCU</text>
               <line x1="210" y1="250" x2="282" y2="250" stroke="#93a1ba" stroke-width="2" marker-end="url(#ah2)"/>
               <text x="246" y="238" text-anchor="middle" font-size="14" fill="#93a1ba">UART</text>
               <text x="246" y="275" text-anchor="middle" font-size="12" fill="#93a1ba">1 Mbps</text>
-              <rect x="285" y="205" width="160" height="90" rx="8" fill="#122544" stroke="#c8894a"/>
+              <rect x="285" y="205" width="160" height="90" rx="3" fill="#122544" stroke="#c8894a"/>
               <text x="365" y="245" text-anchor="middle" font-size="20" font-weight="700">BQ79600</text>
               <text x="365" y="270" text-anchor="middle" font-size="15" fill="#93a1ba">bridge</text>
               <path d="M445 250 H500 V95 H540 M500 195 H540 M500 305 H540 M500 405 H540 M500 250 V405" fill="none" stroke="#c8894a" stroke-width="2.5" stroke-dasharray="7 5"/>
               <text x="470" y="160" text-anchor="middle" font-size="13" fill="#e0ad7a" transform="rotate(-90 470 160)">isolated daisy chain</text>
-              <rect x="540" y="60" width="210" height="70" rx="8" fill="#122544" stroke="#263c63"/><text x="560" y="92" font-size="18" font-weight="700">BQ79616</text><text x="560" y="114" font-size="14" fill="#93a1ba">segment 4, 8 cells</text>
-              <rect x="540" y="160" width="210" height="70" rx="8" fill="#122544" stroke="#263c63"/><text x="560" y="192" font-size="18" font-weight="700">BQ79616</text><text x="560" y="214" font-size="14" fill="#93a1ba">segment 3, 8 cells</text>
-              <rect x="540" y="270" width="210" height="70" rx="8" fill="#122544" stroke="#263c63"/><text x="560" y="302" font-size="18" font-weight="700">BQ79616</text><text x="560" y="324" font-size="14" fill="#93a1ba">segment 2, 8 cells</text>
-              <rect x="540" y="370" width="210" height="70" rx="8" fill="#122544" stroke="#263c63"/><text x="560" y="402" font-size="18" font-weight="700">BQ79616</text><text x="560" y="424" font-size="14" fill="#93a1ba">segment 1, 8 cells</text>
+              <rect x="540" y="60" width="210" height="70" rx="3" fill="#122544" stroke="#263c63"/><text x="560" y="92" font-size="18" font-weight="700">BQ79616</text><text x="560" y="114" font-size="14" fill="#93a1ba">segment 4, 8 cells</text>
+              <rect x="540" y="160" width="210" height="70" rx="3" fill="#122544" stroke="#263c63"/><text x="560" y="192" font-size="18" font-weight="700">BQ79616</text><text x="560" y="214" font-size="14" fill="#93a1ba">segment 3, 8 cells</text>
+              <rect x="540" y="270" width="210" height="70" rx="3" fill="#122544" stroke="#263c63"/><text x="560" y="302" font-size="18" font-weight="700">BQ79616</text><text x="560" y="324" font-size="14" fill="#93a1ba">segment 2, 8 cells</text>
+              <rect x="540" y="370" width="210" height="70" rx="3" fill="#122544" stroke="#263c63"/><text x="560" y="402" font-size="18" font-weight="700">BQ79616</text><text x="560" y="424" font-size="14" fill="#93a1ba">segment 1, 8 cells</text>
             </g>
-          </svg>
+          </svg></div>
           <figcaption>Cell monitoring. One BQ79616 per segment, chained through a BQ79600 bridge, so the MCU needs only one UART for the whole chain.</figcaption>
         </figure>
 
         <p>The rest of the system covers current monitoring, cell balancing, HV contactor control and CAN telemetry, across six boards in total. Power was a design goal throughout. Contactor economizers, the isoUART chain and closed-loop fan control bring the BMS to <strong>10 W active</strong>, 5× less than the previous system, and <strong>25 µA quiescent</strong> for the whole system, both measured on the bench.</p>
 
-        <div class="todo"><b>Coming: full system diagram</b><p>All six boards and how they connect: monitoring, current sensing, contactors, fans and CAN.</p></div>
-        <div class="todo"><b>Coming: board renders</b><p>Renders and layouts of the BMS boards.</p></div>
       </section>
 
       <section id="driver">
@@ -169,12 +169,30 @@
       <section id="leading">
         <h2>Leading the team</h2>
         <p>I lead the 8 engineers building the BMS, across cell monitoring, cell balancing, current sensing, contactor control and CAN telemetry. I review every KiCad and firmware pull request across 8 repositories, which has caught schematic and driver defects before bring-up rather than after.</p>
-        <div class="todo"><b>Coming: team and bench photos</b><p>The team at work and the boards on the bench.</p></div>
       </section>
 
       <section id="next">
-        <h2>What's next</h2>
-        <p>The driver brings up the chain and reads cell voltages today. Next come cell balancing, thermistor temperature readings, and reading the monitors' fault registers and fault pin.</p>
+        <h2>Where it stands</h2>
+        <p>The BMS is in development for the next car. The driver brings up the chain and reads cell voltages today.</p>
+        <div class="status-cols panel">
+          <div>
+            <h3>Working today</h3>
+            <ul>
+              <li>Wake and auto-addressing of the whole chain</li>
+              <li>Configuration written to and verified on every monitor</li>
+              <li>Shutdown when communication stops</li>
+              <li>Cell voltages in millivolts</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Next</h3>
+            <ul>
+              <li>Cell balancing</li>
+              <li>Thermistor temperature readings</li>
+              <li>The monitors' fault registers and fault pin</li>
+            </ul>
+          </div>
+        </div>
       </section>
 
       <nav class="next-proj" aria-label="More projects">
@@ -183,19 +201,29 @@
       </nav>
     </article>
   </div>
+
+  <div class="contact contact--end panel">
+    <div>
+      <h2>Contact</h2>
+      <p>I'm looking for a Summer 2027 internship in embedded firmware or hardware. Email is the fastest way to reach me.</p>
+      <a class="mail" href="mailto:craiggleasoniii@gmail.com">craiggleasoniii@gmail.com</a>
+    </div>
+    <div class="actions">
+      <a class="btn btn--primary" href="/assets/docs/Craig_Gleason_Resume.pdf">Download résumé</a>
+      <a class="btn" href="https://github.com/CraigGleason7">GitHub</a>
+      <a class="btn" href="https://www.linkedin.com/in/craigiii/">LinkedIn</a>
+    </div>
+  </div>
 </main>
 
 <footer class="site-foot">
   <div class="wrap">
-    <div>
-      <h2>Get in touch</h2>
-      <p><a href="mailto:craiggleasoniii@gmail.com">craiggleasoniii@gmail.com</a></p>
-    </div>
-    <div class="actions">
-      <a class="btn" href="https://github.com/CraigGleason7">GitHub</a>
-      <a class="btn" href="https://www.linkedin.com/in/craigiii/">LinkedIn</a>
-      <a class="btn" href="/assets/docs/Craig_Gleason_Resume.pdf">Résumé</a>
-    </div>
+    <p>© 2026 Craig Gleason III</p>
+    <nav aria-label="Footer">
+      <a href="/">Home</a>
+      <a href="/projects/bps-leader/">BPS Leader Board</a>
+      <a href="https://github.com/CraigGleason7/CraigGleason7.github.io">Site source</a>
+    </nav>
   </div>
 </footer>
 <script src="/assets/js/site.js" defer></script>
