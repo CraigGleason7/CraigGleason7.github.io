@@ -27,6 +27,9 @@ assets/docs/                résumé PDF
 
 ## Updating
 
+- After changing `site.css` or `site.js`, raise the `?v=` number on their links
+  in every page (search for `site.css?v=`). Browsers keep old copies of these
+  files, and the new number makes them fetch the new one.
 - Résumé: replace `assets/docs/Craig_Gleason_Resume.pdf` and keep the file name.
 - Code excerpts on the BPS Leader page link to a fixed commit of
   `lhr-solar/PS-BPSLeader` (`cf23af5`, the last one on `main` that carries the
